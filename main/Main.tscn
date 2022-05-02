@@ -1,0 +1,162 @@
+[gd_scene load_steps=12 format=2]
+
+[ext_resource path="res://main/Main.gd" type="Script" id=1]
+[ext_resource path="res://gem/Gem.tscn" type="PackedScene" id=2]
+[ext_resource path="res://player/Player.tscn" type="PackedScene" id=3]
+[ext_resource path="res://assets/Kenney Bold.ttf" type="DynamicFontData" id=4]
+[ext_resource path="res://main/HUD.gd" type="Script" id=5]
+[ext_resource path="res://assets/audio/Level.wav" type="AudioStream" id=6]
+[ext_resource path="res://gem/Cherry.tscn" type="PackedScene" id=7]
+[ext_resource path="res://enemy/Froggy.tscn" type="PackedScene" id=8]
+
+[sub_resource type="DynamicFont" id=1]
+size = 38
+font_data = ExtResource( 4 )
+
+[sub_resource type="DynamicFont" id=2]
+size = 40
+font_data = ExtResource( 4 )
+
+[sub_resource type="RectangleShape2D" id=3]
+extents = Vector2( 83.7261, 10.8849 )
+
+[node name="Main" type="Node2D"]
+script = ExtResource( 1 )
+Gem = ExtResource( 2 )
+Cherry = ExtResource( 7 )
+
+[node name="HUD" type="Control" parent="."]
+anchor_right = 1.0
+margin_right = 450.0
+margin_bottom = 724.0
+script = ExtResource( 5 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="MarginContainer" type="MarginContainer" parent="HUD"]
+anchor_right = 1.0
+margin_bottom = 78.0
+custom_constants/margin_right = 10
+custom_constants/margin_top = 10
+custom_constants/margin_left = 10
+custom_constants/margin_bottom = 10
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="LabelScore" type="Label" parent="HUD/MarginContainer"]
+margin_left = 10.0
+margin_top = 10.0
+margin_right = 440.0
+margin_bottom = 129.0
+custom_fonts/font = SubResource( 1 )
+text = "0
+5"
+
+[node name="LabelTimer" type="Label" parent="HUD/MarginContainer"]
+margin_left = 10.0
+margin_top = 40.0
+margin_right = 440.0
+margin_bottom = 98.0
+custom_fonts/font = SubResource( 1 )
+custom_constants/line_spacing = 0
+custom_constants/shadow_offset_y = 0
+text = "0"
+align = 2
+
+[node name="LabelStage" type="Label" parent="HUD"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -225.0
+margin_top = -93.0
+margin_right = 225.0
+margin_bottom = 93.0
+custom_fonts/font = SubResource( 2 )
+text = "Catch Em 
+All!!!!
+"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Timer" type="Timer" parent="."]
+autostart = true
+
+[node name="GemBag" type="Node2D" parent="."]
+
+[node name="StageUp" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 6 )
+
+[node name="CherryTimer" type="Timer" parent="."]
+one_shot = true
+
+[node name="Froggy" parent="." instance=ExtResource( 8 )]
+position = Vector2( 229.328, 568.417 )
+
+[node name="Froggy2" parent="." instance=ExtResource( 8 )]
+position = Vector2( 264.15, 486.25 )
+
+[node name="Player" parent="." instance=ExtResource( 3 )]
+position = Vector2( 219.388, 186.503 )
+
+[node name="Platform" type="StaticBody2D" parent="."]
+position = Vector2( 231.128, 636.063 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Platform"]
+position = Vector2( -4.48987, 1.12247 )
+shape = SubResource( 3 )
+
+[node name="Plataforms" type="Node" parent="."]
+
+[node name="Platform0" type="StaticBody2D" parent="Plataforms"]
+position = Vector2( 114.586, 493.359 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Plataforms/Platform0"]
+position = Vector2( -4.48987, 1.12247 )
+shape = SubResource( 3 )
+
+[node name="Platform1" type="StaticBody2D" parent="Plataforms"]
+position = Vector2( 352.427, 383.952 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Plataforms/Platform1"]
+position = Vector2( -4.48987, 1.12247 )
+shape = SubResource( 3 )
+
+[node name="Plataform2" type="StaticBody2D" parent="Plataforms"]
+position = Vector2( 126.478, 257.896 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Plataforms/Plataform2"]
+position = Vector2( -4.48987, 1.12247 )
+shape = SubResource( 3 )
+
+[node name="Platform3" type="StaticBody2D" parent="Plataforms"]
+position = Vector2( 323.886, 136.597 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Plataforms/Platform3"]
+position = Vector2( -4.48987, 1.12247 )
+shape = SubResource( 3 )
+
+[connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
+[connection signal="timeout" from="CherryTimer" to="." method="_on_CherryTimer_timeout"]
+[connection signal="hard" from="Player" to="." method="_on_Player_hard"]
+[connection signal="picked" from="Player" to="." method="_on_Player_picked"]

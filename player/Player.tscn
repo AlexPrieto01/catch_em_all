@@ -1,0 +1,75 @@
+[gd_scene load_steps=19 format=2]
+
+[ext_resource path="res://assets/player/run/player-run-6.png" type="Texture" id=1]
+[ext_resource path="res://assets/player/run/player-run-1.png" type="Texture" id=2]
+[ext_resource path="res://assets/player/run/player-run-3.png" type="Texture" id=3]
+[ext_resource path="res://assets/player/hurt/player-hurt-2.png" type="Texture" id=4]
+[ext_resource path="res://assets/player/run/player-run-5.png" type="Texture" id=5]
+[ext_resource path="res://assets/player/idle/player-idle-3.png" type="Texture" id=6]
+[ext_resource path="res://assets/player/idle/player-idle-4.png" type="Texture" id=7]
+[ext_resource path="res://assets/player/run/player-run-2.png" type="Texture" id=8]
+[ext_resource path="res://assets/player/run/player-run-4.png" type="Texture" id=9]
+[ext_resource path="res://assets/player/idle/player-idle-2.png" type="Texture" id=10]
+[ext_resource path="res://assets/player/hurt/player-hurt-1.png" type="Texture" id=11]
+[ext_resource path="res://assets/player/idle/player-idle-1.png" type="Texture" id=12]
+[ext_resource path="res://player/Player.gd" type="Script" id=13]
+[ext_resource path="res://assets/audio/Cherry.wav" type="AudioStream" id=14]
+[ext_resource path="res://assets/audio/Hit.wav" type="AudioStream" id=15]
+[ext_resource path="res://assets/audio/Powerup.wav" type="AudioStream" id=16]
+
+[sub_resource type="CapsuleShape2D" id=1]
+radius = 7.68462
+height = 5.25075
+
+[sub_resource type="SpriteFrames" id=2]
+animations = [ {
+"frames": [ ExtResource( 12 ), ExtResource( 10 ), ExtResource( 6 ), ExtResource( 7 ) ],
+"loop": true,
+"name": "idle",
+"speed": 10.0
+}, {
+"frames": [ ExtResource( 11 ), ExtResource( 4 ) ],
+"loop": true,
+"name": "hurt",
+"speed": 10.0
+}, {
+"frames": [ ExtResource( 2 ), ExtResource( 8 ), ExtResource( 3 ), ExtResource( 9 ), ExtResource( 5 ), ExtResource( 1 ) ],
+"loop": true,
+"name": "run",
+"speed": 10.0
+} ]
+
+[node name="Player" type="Area2D"]
+scale = Vector2( 2.5, 2.5 )
+script = ExtResource( 13 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2( -1.5, 6 )
+shape = SubResource( 1 )
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="."]
+position = Vector2( -2, 0 )
+frames = SubResource( 2 )
+animation = "idle"
+frame = 3
+playing = true
+
+[node name="GemAudio" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 14 )
+
+[node name="HitAudio" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 15 )
+
+[node name="CherryAudio" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 16 )
+
+[node name="powerUp" type="Timer" parent="."]
+wait_time = 3.0
+one_shot = true
+
+[connection signal="area_entered" from="." to="." method="_on_Player_area_entered"]
+[connection signal="body_entered" from="." to="." method="_on_Player_body_entered"]
+[connection signal="timeout" from="powerUp" to="." method="_powerUp_End"]
