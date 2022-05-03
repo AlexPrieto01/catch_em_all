@@ -8,10 +8,11 @@ const BONUS_TIME = 10
 export(PackedScene) var Gem
 export(PackedScene) var Cherry
 #vars
+var global
 var Cherry2 = preload("res://gem/Cherry.tscn")
 var stage = 0
 var screenSize = Vector2.ZERO
-var timeLeft = 0
+var initialTimeLeft
 var score = 0
 var scoreByStage = BASE_GEMS
 var scoreMaxByStage = BASE_GEMS
@@ -21,23 +22,37 @@ var auxStr
 onready var gameOverDelay = Timer.new()
 
 func _ready():
-	randomize()
 	OS.center_window()
-	time_settings()
+	global = get_node("/root/Global")
+	randomize()
+	initial_settings(global.hard_mode, global.release_frogs)
 	screenSize = get_viewport().get_size()
 	print(str(screenSize))
 	spawn_gems()
 	set_cherryTime()
 
+func initial_settings(var hard, var frogs):
+	if hard:
+		time_settings(5)
+		pass
+	else:
+		time_settings(20)
+		pass
+	
+	if frogs:
+		$Froggy.queue_free()
+		$Froggy2.queue_free()
+		$Platform.queue_free()
+
 func _process(delta):
-	update_Platform()
+	update_platform()
 	check_Stage()
 
-func time_settings():
+func time_settings(var time):
 	
-	timeLeft = 30
+	initialTimeLeft = time
 	
-	$HUD.update_timer(timeLeft)
+	$HUD.update_timer(initialTimeLeft)
 	gameOverDelay.wait_time = 2
 	gameOverDelay.connect("timeout", self, "_on_gameOverDelay_timeout")
 	self.add_child(gameOverDelay)
@@ -49,7 +64,7 @@ func check_Stage():
 	if $GemBag.get_child_count() == 0:
 		#Update stage and time bonus
 		stage+=1
-		timeLeft += BONUS_TIME
+		initialTimeLeft += BONUS_TIME
 		$StageUp.play()
 #		audio = AudioStreamPlayer.new()
 #		audio.stream = load("res://assets/audio/Level.wav")
@@ -71,11 +86,15 @@ func spawn_gems():
 			gem.position = Vector2(rand_range(0,screenSize.x), rand_range(0,screenSize.y))
 			$GemBag.add_child(gem)
 
+func update_platform():
+	if !global.release_frogs:
+		$Platform.position.x = $Froggy.position.x
+	
 
 func _on_Timer_timeout():
-	timeLeft -= 1
-	if timeLeft >= 0:
-		$HUD.update_timer(timeLeft)
+	initialTimeLeft -= 1
+	if initialTimeLeft >= 0:
+		$HUD.update_timer(initialTimeLeft)
 	else:
 		game_over()
 
@@ -105,13 +124,13 @@ func set_cherryTime():
 	$CherryTimer.wait_time = waitTime
 	$CherryTimer.start()
 
-func update_Platform():
-	$Platform.position.x = $Froggy.position.x 
+func getRandomPosition():
+	return Vector2(rand_range(0,screenSize.x), rand_range(0,screenSize.y))
 
 func _on_CherryTimer_timeout():
 	if Cherry2 != null:
 		var cherry = Cherry2.instance()
-		cherry.position = Vector2(rand_range(0,screenSize.x), rand_range(0,screenSize.y))
+		cherry.position = getRandomPosition()
 		add_child(cherry)
 		set_cherryTime()
 

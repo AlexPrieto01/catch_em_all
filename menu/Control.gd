@@ -10,3 +10,7 @@ func _process(delta):
 		
 func _on_LabelStart_pressed():
 	get_tree().change_scene("res://main/Main.tscn")
+
+func _on_LabelAssets_pressed():
+	get_tree().change_scene("res://menu/Settings.tscn")
+

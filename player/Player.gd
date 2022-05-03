@@ -13,6 +13,7 @@ func _ready():
 	
 func _process(delta):
 	_character_control()
+	_tocuch_control(InputEventScreenTouch)
 	_sprite_control()
 	_velocity_control(delta)
 	_limit_control()
@@ -21,16 +22,14 @@ func _process(delta):
 func _character_control():
 	hurt=false;
 	velocity = Vector2.ZERO
-	if Input.is_action_pressed("ui_up"):
-		velocity.y += -1
-	if Input.is_action_pressed("ui_down"):
-		velocity.y += 1
-	if Input.is_action_pressed("ui_left"):
-		velocity.x += -1
-	if Input.is_action_pressed("ui_right"):
-		velocity.x += 1
+	velocity.y = int(Input.is_action_pressed("ui_down"))-int(Input.is_action_pressed("ui_up"))
+	velocity.x = int(Input.is_action_pressed("ui_right"))-int(Input.is_action_pressed("ui_left"))
 	if Input.is_action_pressed("ui_accept"):
 		hurt=true	
+
+func _tocuch_control(event):
+	if event is InputEventScreenTouch:
+		print(event.position)
 
 #Cambio de sprites
 func _sprite_control():

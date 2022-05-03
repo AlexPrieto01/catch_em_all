@@ -70,6 +70,7 @@ func _on_Timer_timeout():
 	$Timer.stop()
 	if state == IDLE:
 		transition_to(BREATHE)
+		$Croack.play()
 #	$AnimationPlayer.play("idle")
 	setTimer()
 
