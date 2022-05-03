@@ -47,6 +47,12 @@ func initial_settings(var hard, var frogs):
 func _process(delta):
 	update_platform()
 	check_Stage()
+	_tocuch_control(InputEventScreenTouch)
+
+func _tocuch_control(event):
+	if event is InputEventScreenTouch:
+		print(event.position)
+		$Player/AnimatedSprite.play("hurt")
 
 func time_settings(var time):
 	
@@ -115,7 +121,7 @@ func _on_Player_picked(type): #type gem or cherry
 func game_over():
 	$HUD.update_stage("You lose!")
 	$Timer.stop()
-	$Player.game_over()
+	$TouchScreenController/TouchScreenButton/Player.game_over()
 	set_process(false)
 	gameOverDelay.start()
 
