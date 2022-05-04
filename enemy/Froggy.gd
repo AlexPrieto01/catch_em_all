@@ -1,12 +1,14 @@
 extends KinematicBody2D
 
-var auxAnimationName
-
 export(int) var gravity
 export(int) var jump
 export(int) var speed
 
+const marginScreen = 50
+
+var screenSize
 var velocity = Vector2.ZERO
+var auxAnimationName
 var current_anim
 var new_anim
 
@@ -52,6 +54,7 @@ func _physics_process(delta):
 
 func _ready():
 	randomize()
+	screenSize = Global.screenSize
 	$Sprite.frame = 0
 	transition_to(IDLE)
 	setTimer()
@@ -91,11 +94,11 @@ func update_Speed():
 	speed = speed * -1 if bool(randi() % 2) else speed * 1
 	
 func _limit_control():
-	if position.x>460:
-		position.x=-10
-	if position.x<-10:
-		position.x=450
-	if position.y>730:
-		position.y=-10
-	if position.y<-10:
-		position.y=730
+	if position.x > screenSize.x:
+		position.x = -marginScreen
+	if position.x < -marginScreen:
+		position.x = screenSize.x
+	if position.y>screenSize.y:
+		position.y = -marginScreen
+	if position.y < -marginScreen:
+		position.y = screenSize.y

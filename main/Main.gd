@@ -4,13 +4,16 @@ extends Node2D
 #constants
 const BASE_GEMS = 5
 const BONUS_TIME = 10
+const FROGGY_HIGH = -280
+const STAGEFORFROG = 5
 #exports
+export(PackedScene) var Froggy
 export(PackedScene) var Gem
 export(PackedScene) var Cherry
 #vars
 var global
 var Cherry2 = preload("res://gem/Cherry.tscn")
-var stage = 0
+var stage = 9999
 var screenSize = Vector2.ZERO
 var initialTimeLeft
 var score = 0
@@ -22,11 +25,11 @@ var auxStr
 onready var gameOverDelay = Timer.new()
 
 func _ready():
-	OS.center_window()
+	#OS.center_window()
 	global = get_node("/root/Global")
 	randomize()
 	initial_settings(global.hard_mode, global.release_frogs)
-	screenSize = get_viewport().get_size()
+	screenSize = Global.screenSize
 	print(str(screenSize))
 	spawn_gems()
 	set_cherryTime()
@@ -40,18 +43,16 @@ func initial_settings(var hard, var frogs):
 		pass
 	
 	if frogs:
-		$Froggy.queue_free()
-		$Froggy2.queue_free()
+		$FroggyBag.queue_free()
 		$Platform.queue_free()
 
 func _process(delta):
 	update_platform()
 	check_Stage()
-	_tocuch_control(InputEventScreenTouch)
+	_touch_control(InputEventScreenTouch)
 
-func _tocuch_control(event):
+func _touch_control(event):
 	if event is InputEventScreenTouch:
-		print(event.position)
 		$Player/AnimatedSprite.play("hurt")
 
 func time_settings(var time):
@@ -79,22 +80,45 @@ func check_Stage():
 		$HUD.update_stage("Stage "+str(stage))
 		scoreByStage = BASE_GEMS+stage
 		scoreMaxByStage += scoreByStage
-		gemsLeft = scoreByStage
-		auxStr = str(score)+"\n"+str(scoreMaxByStage)
-		$HUD.update_score(auxStr)
+		#gemsLeft = scoreByStage
+		
+		#auxStr = str($GemBag.get_child_count())+"\n"+str(scoreMaxByStage)
+		#$HUD.update_score(auxStr)
 		spawn_gems()
+		if stage%STAGEFORFROG == 0:
+			spawn_frog()
 		print("Total gems: "+str($GemBag.get_child_count()))
 		
 func spawn_gems():
 	if Gem != null:
 		for i in range(scoreByStage):
 			var gem = Gem.instance()
-			gem.position = Vector2(rand_range(0,screenSize.x), rand_range(0,screenSize.y))
+			gem.position = getRandomPosition(50)
 			$GemBag.add_child(gem)
+
+func spawn_frog():
+	var frog = Froggy.instance()
+	frog.position = Vector2(
+		rand_range(
+			Global.marginScreen, 
+			screenSize.x-Global.marginScreen),
+		FROGGY_HIGH)
+	frog.modulate = Color(
+		rand_range(0,1),
+		rand_range(0,1),
+		rand_range(0,1)
+	)
+	#Easter egg
+	if stage == 100:
+		frog.scale = Vector2(5, 5)
+	print(frog.modulate)
+	frog.jump = int(rand_range(-400, -700))
+	frog.speed = int(rand_range(100, 300))
+	$FroggyBag.add_child(frog)
 
 func update_platform():
 	if !global.release_frogs:
-		$Platform.position.x = $Froggy.position.x
+		$Platform.position.x = $FroggyBag/FroggyBoss.position.x
 	
 
 func _on_Timer_timeout():
@@ -113,9 +137,9 @@ func _on_Player_picked(type): #type gem or cherry
 			auxStr = str(score)+"\n"+str(scoreMaxByStage)
 			$HUD.update_score(auxStr)
 			gemsLeft-=1
-			print("Gems left: "+str(gemsLeft))
+			#print("Gems left: "+str(gemsLeft))
 		"cherry":
-			$Player._powerUp_Start()
+			$TouchScreenController/TouchScreenButton/Player._powerUp_Start()
 	
 
 func game_over():
@@ -130,13 +154,13 @@ func set_cherryTime():
 	$CherryTimer.wait_time = waitTime
 	$CherryTimer.start()
 
-func getRandomPosition():
-	return Vector2(rand_range(0,screenSize.x), rand_range(0,screenSize.y))
+func getRandomPosition(red):
+	return Vector2(rand_range(red,screenSize.x-red), rand_range(red,screenSize.y-red))
 
 func _on_CherryTimer_timeout():
 	if Cherry2 != null:
 		var cherry = Cherry2.instance()
-		cherry.position = getRandomPosition()
+		cherry.position = getRandomPosition(-50)
 		add_child(cherry)
 		set_cherryTime()
 

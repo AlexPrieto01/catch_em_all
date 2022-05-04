@@ -1,13 +1,11 @@
 extends Area2D
 
+var screenSize
+var marginScreen
 
-# Declare member variables here. Examples:
-# var a = 2
-# var b = "text"
-
-
-# Called when the node enters the scene tree for the first time.
 func _ready():
+	screenSize = Global.screenSize
+	marginScreen = Global.marginScreen
 	$AnimatedSprite.animation = "default"
 	#Escalado
 	$Tween.interpolate_property(
@@ -36,12 +34,12 @@ func pickup():
 #	yield($Tween, "tween_completed")
 #	call_deferred("queue_free")
 
-
 func _on_Tween_tween_all_completed():
 	call_deferred("queue_free")
 
-
 func _on_Gem_body_entered(body):
-	if body.is_in_group("enemy"):
-		position = Vector2(rand_range(0,450), rand_range(0,720))
+	if body.is_in_group("enemy") or body.is_in_group("collision"):
+		position = Vector2(
+			rand_range(marginScreen,screenSize.x-marginScreen), 
+			rand_range(marginScreen,screenSize.y-marginScreen))
 		print("Gema colisiona con rana")

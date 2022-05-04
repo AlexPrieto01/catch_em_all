@@ -28,14 +28,14 @@ animations = [ {
 "name": "idle",
 "speed": 10.0
 }, {
-"frames": [ ExtResource( 2 ), ExtResource( 8 ), ExtResource( 3 ), ExtResource( 9 ), ExtResource( 5 ), ExtResource( 1 ) ],
-"loop": true,
-"name": "run",
-"speed": 10.0
-}, {
 "frames": [ ExtResource( 11 ), ExtResource( 4 ) ],
 "loop": true,
 "name": "hurt",
+"speed": 10.0
+}, {
+"frames": [ ExtResource( 2 ), ExtResource( 8 ), ExtResource( 3 ), ExtResource( 9 ), ExtResource( 5 ), ExtResource( 1 ) ],
+"loop": true,
+"name": "run",
 "speed": 10.0
 } ]
 
@@ -54,7 +54,7 @@ shape = SubResource( 1 )
 position = Vector2( -2, 0 )
 frames = SubResource( 2 )
 animation = "idle"
-frame = 3
+frame = 2
 playing = true
 
 [node name="GemAudio" type="AudioStreamPlayer" parent="."]

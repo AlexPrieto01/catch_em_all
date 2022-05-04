@@ -23,6 +23,7 @@ tracks/0/keys = {
 [sub_resource type="Animation" id=2]
 resource_name = "idle"
 length = 0.1
+loop = true
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:frame")
 tracks/0/interp = 1
@@ -94,9 +95,10 @@ anims/jump_up = SubResource( 4 )
 position = Vector2( 1.7818, -1.24726 )
 texture = ExtResource( 1 )
 hframes = 7
-frame = 6
+frame = 4
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
 shape = SubResource( 5 )
 one_way_collision = true
 

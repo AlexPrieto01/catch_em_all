@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=2]
+[gd_scene load_steps=17 format=2]
 
 [ext_resource path="res://main/Main.gd" type="Script" id=1]
 [ext_resource path="res://gem/Gem.tscn" type="PackedScene" id=2]
@@ -10,6 +10,7 @@
 [ext_resource path="res://enemy/Froggy.tscn" type="PackedScene" id=8]
 [ext_resource path="res://main/TouchScreenButton.gd" type="Script" id=9]
 [ext_resource path="res://icon.png" type="Texture" id=10]
+[ext_resource path="res://assets/grass/istockphoto-1285741031-170667a.jpg" type="Texture" id=11]
 
 [sub_resource type="DynamicFont" id=1]
 size = 38
@@ -20,7 +21,7 @@ size = 40
 font_data = ExtResource( 4 )
 
 [sub_resource type="RectangleShape2D" id=3]
-extents = Vector2( 83.7261, 10.8849 )
+extents = Vector2( 147.253, 3.83765 )
 
 [sub_resource type="GDScript" id=4]
 script/source = "extends StaticBody2D
@@ -36,17 +37,24 @@ func _process(delta):
 "
 
 [sub_resource type="RectangleShape2D" id=5]
-extents = Vector2( 100, 100 )
 
 [node name="Main" type="Node2D"]
 script = ExtResource( 1 )
+Froggy = ExtResource( 8 )
 Gem = ExtResource( 2 )
 Cherry = ExtResource( 7 )
 
+[node name="Background" type="Sprite" parent="."]
+scale = Vector2( 2.1, 1.15 )
+texture = ExtResource( 11 )
+centered = false
+
 [node name="HUD" type="Control" parent="."]
 anchor_right = 1.0
-margin_right = 450.0
-margin_bottom = 724.0
+margin_left = -1.49832
+margin_top = -6.61143
+margin_right = 852.502
+margin_bottom = 473.389
 script = ExtResource( 5 )
 __meta__ = {
 "_edit_use_anchors_": false
@@ -54,7 +62,8 @@ __meta__ = {
 
 [node name="MarginContainer" type="MarginContainer" parent="HUD"]
 anchor_right = 1.0
-margin_bottom = 78.0
+margin_right = -10.0
+margin_bottom = 139.0
 custom_constants/margin_right = 10
 custom_constants/margin_top = 10
 custom_constants/margin_left = 10
@@ -66,7 +75,7 @@ __meta__ = {
 [node name="LabelScore" type="Label" parent="HUD/MarginContainer"]
 margin_left = 10.0
 margin_top = 10.0
-margin_right = 440.0
+margin_right = 834.0
 margin_bottom = 129.0
 custom_fonts/font = SubResource( 1 )
 text = "0
@@ -75,23 +84,23 @@ text = "0
 [node name="LabelTimer" type="Label" parent="HUD/MarginContainer"]
 margin_left = 10.0
 margin_top = 40.0
-margin_right = 440.0
+margin_right = 834.0
 margin_bottom = 98.0
 custom_fonts/font = SubResource( 1 )
 custom_constants/line_spacing = 0
 custom_constants/shadow_offset_y = 0
 text = "0"
-align = 2
+align = 1
 
 [node name="LabelStage" type="Label" parent="HUD"]
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = -225.0
-margin_top = -93.0
-margin_right = 225.0
-margin_bottom = 93.0
+margin_left = -226.0
+margin_top = -81.531
+margin_right = 224.0
+margin_bottom = 104.469
 custom_fonts/font = SubResource( 2 )
 text = "Catch Em 
 All!!!!
@@ -113,10 +122,10 @@ stream = ExtResource( 6 )
 [node name="CherryTimer" type="Timer" parent="."]
 one_shot = true
 
-[node name="Plataforms" type="Node" parent="."]
+[node name="Plataforms" type="Node2D" parent="."]
 
 [node name="Platform0" type="StaticBody2D" parent="Plataforms"]
-position = Vector2( 114.586, 491.945 )
+position = Vector2( 734.652, 399.292 )
 __meta__ = {
 "_edit_group_": true
 }
@@ -126,7 +135,7 @@ position = Vector2( -4.48987, 1.12247 )
 shape = SubResource( 3 )
 
 [node name="Platform1" type="StaticBody2D" parent="Plataforms"]
-position = Vector2( 352.427, 383.952 )
+position = Vector2( 212.596, 318.491 )
 __meta__ = {
 "_edit_group_": true
 }
@@ -136,7 +145,7 @@ position = Vector2( -4.48987, 1.12247 )
 shape = SubResource( 3 )
 
 [node name="Plataform2" type="StaticBody2D" parent="Plataforms"]
-position = Vector2( 126.478, 257.896 )
+position = Vector2( 568.364, 252.551 )
 __meta__ = {
 "_edit_group_": true
 }
@@ -146,7 +155,7 @@ position = Vector2( -4.48987, 1.12247 )
 shape = SubResource( 3 )
 
 [node name="Platform3" type="StaticBody2D" parent="Plataforms"]
-position = Vector2( 323.886, 136.597 )
+position = Vector2( 298.941, 120.561 )
 __meta__ = {
 "_edit_group_": true
 }
@@ -155,17 +164,8 @@ __meta__ = {
 position = Vector2( -4.48987, 1.12247 )
 shape = SubResource( 3 )
 
-[node name="Background" type="TileMap" parent="."]
-format = 1
-
-[node name="Froggy" parent="." instance=ExtResource( 8 )]
-position = Vector2( 229.328, 568.417 )
-
-[node name="Froggy2" parent="." instance=ExtResource( 8 )]
-position = Vector2( 264.15, 486.25 )
-
 [node name="Platform" type="StaticBody2D" parent="."]
-position = Vector2( 231.128, 636.063 )
+position = Vector2( 564.224, 475.801 )
 script = SubResource( 4 )
 __meta__ = {
 "_edit_group_": true
@@ -179,13 +179,14 @@ shape = SubResource( 3 )
 
 [node name="TouchScreenButton" type="TouchScreenButton" parent="TouchScreenController"]
 position = Vector2( 3.05176e-05, 3.05176e-05 )
-scale = Vector2( 1, 1 )
 shape = SubResource( 5 )
 script = ExtResource( 9 )
 
 [node name="Base" type="Sprite" parent="TouchScreenController/TouchScreenButton"]
+visible = false
 self_modulate = Color( 1, 0, 0, 0.392157 )
-position = Vector2( -3.05176e-05, -3.05176e-05 )
+position = Vector2( 421.024, 214.258 )
+scale = Vector2( 1.5, 1.5 )
 texture = ExtResource( 10 )
 
 [node name="Joystick" type="Sprite" parent="TouchScreenController/TouchScreenButton/Base"]
@@ -194,11 +195,17 @@ scale = Vector2( 0.5, 0.5 )
 texture = ExtResource( 10 )
 
 [node name="Player" parent="TouchScreenController/TouchScreenButton" instance=ExtResource( 3 )]
-position = Vector2( 267.914, 185.754 )
+position = Vector2( 280.964, 222.717 )
+
+[node name="FroggyBag" type="Node2D" parent="."]
+
+[node name="FroggyBoss" parent="FroggyBag" instance=ExtResource( 8 )]
+position = Vector2( 400, -280 )
 
 [connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
 [connection signal="timeout" from="CherryTimer" to="." method="_on_CherryTimer_timeout"]
 [connection signal="pressed" from="TouchScreenController/TouchScreenButton" to="TouchScreenController/TouchScreenButton" method="_on_TouchScreenButton_pressed"]
 [connection signal="released" from="TouchScreenController/TouchScreenButton" to="TouchScreenController/TouchScreenButton" method="_on_TouchScreenButton_released"]
 [connection signal="hard" from="TouchScreenController/TouchScreenButton/Player" to="." method="_on_Player_hard"]
+[connection signal="hard" from="TouchScreenController/TouchScreenButton/Player" to="TouchScreenController/TouchScreenButton" method="_on_Player_hard"]
 [connection signal="picked" from="TouchScreenController/TouchScreenButton/Player" to="." method="_on_Player_picked"]

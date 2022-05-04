@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/ClassicRPG_Sheet.png-6f089ea7ad13d9e46985a90a95d1c13d.stex"
+path="res://.import/istockphoto-1285741031-170667a.jpg-69a717a97b16043494357e065be284b6.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/rpgTileset/ClassicRPG_Sheet.png"
-dest_files=[ "res://.import/ClassicRPG_Sheet.png-6f089ea7ad13d9e46985a90a95d1c13d.stex" ]
+source_file="res://assets/grass/istockphoto-1285741031-170667a.jpg"
+dest_files=[ "res://.import/istockphoto-1285741031-170667a.jpg-69a717a97b16043494357e065be284b6.stex" ]
 
 [params]
 

@@ -1,11 +1,6 @@
 extends Area2D
 
 
-# Declare member variables here. Examples:
-# var a = 2
-# var b = "text"
-
-
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	$AnimatedSprite.animation = "default"
@@ -36,10 +31,8 @@ func pickup():
 #	yield($Tween, "tween_completed")
 #	call_deferred("queue_free")
 
-
 func _on_Tween_tween_all_completed():
 	call_deferred("queue_free")
-
 
 func _on_Timer_timeout():
 	call_deferred("queue_free")

@@ -2,19 +2,23 @@ extends Area2D
 #signal
 signal picked
 signal hard
+#constants
+var marginScreen
 #var
 var velocity = Vector2.ZERO
+var screenSize
 var speed = 400
 var turbo
 var hurt
+
 func _ready():
-	OS.center_window()
-	position = Vector2(225,360)
+	marginScreen = Global.marginScreen
+	screenSize = Global.screenSize
 	
 func _process(delta):
-	_character_control()
-	_sprite_control()
-	_velocity_control(delta)
+	#_character_control()
+	#_sprite_control()
+	#_velocity_control(delta)
 	_limit_control()
 	
 #Movimiento del personaje
@@ -49,14 +53,14 @@ func _velocity_control(delta):
 
 #Control de limite
 func _limit_control():
-	if position.x>500:
-		position.x=-50
-	if position.x<-50:
-		position.x=500
-	if position.y>750:
-		position.y=-50
-	if position.y<-50:
-		position.y=750
+	if position.x > screenSize.x:
+		position.x = -marginScreen
+	if position.x < -marginScreen:
+		position.x = screenSize.x
+	if position.y>screenSize.y:
+		position.y = -marginScreen
+	if position.y < -marginScreen:
+		position.y = screenSize.y
 #	if position.x>450:
 #		position.x=450
 #	if position.x<0:
@@ -75,8 +79,12 @@ func _on_Player_area_entered(area):
 	elif area.is_in_group("cherry"):
 		$CherryAudio.play()
 		emit_signal("picked", "cherry")
+		
 	if area.has_method("pickup"):
 		area.pickup()
+		
+	elif area.is_in_group("collision"):
+		pass
 
 
 

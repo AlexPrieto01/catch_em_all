@@ -1,5 +1,7 @@
 extends TouchScreenButton
 
+const limit = 20
+
 var screenSize = Vector2.ZERO
 var touchPos = null
 var basePos = Vector2.ZERO
@@ -9,10 +11,11 @@ var velocity = Vector2.ZERO
 var speed = 400
 var auxPosition
 
+
 func _ready():
-	screenSize = get_viewport().get_size()
-	shape.extents.x = screenSize.x
-	shape.extents.y = screenSize.y
+	screenSize = Global.screenSize
+	shape.extents = screenSize
+	
 
 func _on_TouchScreenButton_pressed():
 	isAreaEntered = true
@@ -25,7 +28,7 @@ func _on_TouchScreenButton_released():
 
 func _input(event):
 	if isAreaEntered and InputEventScreenTouch:
-		if touchPos==null: 
+		if touchPos==null and !$Base.visible: 
 			touchPos = event.get_position() 
 			basePos = touchPos
 			$Base.show()
@@ -33,19 +36,39 @@ func _input(event):
 			$Base.position = touchPos
 		else:
 			touchPos = event.get_position() 
-		$Base/Joystick.position = touchPos-$Base.position
-		print($Base/Joystick.position)
+			touchPos.x = clamp(touchPos.x, -limit+$Base.position.x, limit+$Base.position.x)
+			touchPos.y = clamp(touchPos.y, -limit+$Base.position.y, limit+$Base.position.y)
+		
+		#Procura que el movimiento sea más circular
+		auxPosition = touchPos-$Base.position
+		$Base/Joystick.position.x = auxPosition.x * abs(auxPosition.normalized().x)
+		$Base/Joystick.position.y = auxPosition.y * abs(auxPosition.normalized().y)
+		
 
 #Movimiento del personaje
 func _character_control(delta):
 	velocity = Vector2.ZERO
-	velocity = $Base/Joystick.position*delta*speed
-	
-	
+	if isAreaEntered:
+		velocity = $Base/Joystick.position
+		
+
+func _sprite_control():
+	if velocity.x !=0 or velocity.y!=0:
+		if velocity.x<0:
+			$Player/AnimatedSprite.flip_h=true
+		elif velocity.x>0:
+			$Player/AnimatedSprite.flip_h=false
+		$Player/AnimatedSprite.play("run")
+	else:
+		$Player/AnimatedSprite.play("idle")
 
 func _process(delta):
-	
-	pass
-	
+	_character_control(delta)
+	_sprite_control()
+	if velocity.length()>0:
+		velocity = velocity.normalized()*speed*delta
+		$Player.position += velocity
 
 
+func _on_Player_hard():
+	set_process(false)

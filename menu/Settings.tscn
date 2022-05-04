@@ -15,13 +15,12 @@ font_data = ExtResource( 1 )
 script = ExtResource( 2 )
 
 [node name="Difficulty" type="Label" parent="."]
-margin_top = 13.0
-margin_right = 450.0
-margin_bottom = 103.0
+margin_left = 25.0
+margin_top = 15.0
+margin_right = 665.0
+margin_bottom = 105.0
 custom_fonts/font = SubResource( 1 )
-text = "Do you want 
-a challenge?"
-align = 1
+text = "Do you want a challenge?"
 autowrap = true
 __meta__ = {
 "_edit_use_anchors_": false
@@ -33,10 +32,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = -218.905
-margin_top = 79.9424
-margin_right = -3.90515
-margin_bottom = 180.942
+margin_left = -40.0
+margin_top = 30.0
+margin_right = 175.0
+margin_bottom = 131.0
 custom_fonts/font = SubResource( 2 )
 text = "Yes!"
 __meta__ = {
@@ -49,32 +48,22 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = 8.09485
-margin_top = 79.9424
-margin_right = 223.095
-margin_bottom = 180.942
+margin_left = 230.0
+margin_top = 30.0
+margin_right = 445.0
+margin_bottom = 131.0
 custom_fonts/font = SubResource( 2 )
 text = "No..."
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Label2" type="Label" parent="."]
-margin_left = 518.414
-margin_top = 1.49832
-margin_right = 818.414
-margin_bottom = 151.498
-custom_fonts/font = SubResource( 1 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
 [node name="Back" type="Button" parent="."]
 show_behind_parent = true
-margin_left = 110.713
-margin_top = 590.179
-margin_right = 325.713
-margin_bottom = 691.178
+margin_left = 21.713
+margin_top = 356.179
+margin_right = 236.713
+margin_bottom = 457.178
 custom_fonts/font = SubResource( 2 )
 text = "Back"
 __meta__ = {
@@ -82,13 +71,12 @@ __meta__ = {
 }
 
 [node name="Frogs" type="Label" parent="."]
-margin_top = 277.498
-margin_right = 450.0
-margin_bottom = 367.498
+margin_left = 25.0
+margin_top = 220.0
+margin_right = 625.0
+margin_bottom = 310.0
 custom_fonts/font = SubResource( 1 )
-text = "Release the
-frogs???"
-align = 1
+text = "Release the frogs???"
 autowrap = true
 __meta__ = {
 "_edit_use_anchors_": false
@@ -100,10 +88,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = -218.905
-margin_top = 79.9424
-margin_right = -3.90515
-margin_bottom = 180.942
+margin_left = -20.0
+margin_top = 35.0
+margin_right = 195.0
+margin_bottom = 136.0
 custom_fonts/font = SubResource( 2 )
 text = "Yes!"
 __meta__ = {
@@ -116,10 +104,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = 8.09485
-margin_top = 79.9424
-margin_right = 223.095
-margin_bottom = 180.942
+margin_left = 250.0
+margin_top = 35.0
+margin_right = 465.0
+margin_bottom = 136.0
 custom_fonts/font = SubResource( 2 )
 text = "No..."
 __meta__ = {
