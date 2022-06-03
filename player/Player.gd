@@ -17,8 +17,8 @@ func _ready():
 	
 func _process(delta):
 	#_character_control()
-	#_sprite_control()
-	#_velocity_control(delta)
+	_sprite_control()
+	_velocity_control(delta)
 	_limit_control()
 	
 #Movimiento del personaje
@@ -104,3 +104,7 @@ func game_over():
 func _on_Player_body_entered(body):
 	if body.is_in_group("enemy"):
 		emit_signal("hard") 
+
+func _on_joystick_signal(new_velocity):
+	print(new_velocity)
+	velocity = new_velocity

@@ -1,5 +1,7 @@
 extends TouchScreenButton
 
+signal joystick(velocity)
+
 const limit = 20
 
 var screenSize = Vector2.ZERO
@@ -15,6 +17,8 @@ var auxPosition
 func _ready():
 	screenSize = Global.screenSize
 	shape.extents = screenSize
+	
+	connect("joystick", $Player, "_on_joystick_signal")
 	
 
 func _on_TouchScreenButton_pressed():
@@ -36,13 +40,14 @@ func _input(event):
 			$Base.position = touchPos
 		else:
 			touchPos = event.get_position() 
-			touchPos.x = clamp(touchPos.x, -limit+$Base.position.x, limit+$Base.position.x)
-			touchPos.y = clamp(touchPos.y, -limit+$Base.position.y, limit+$Base.position.y)
+			#touchPos.x = clamp(touchPos.x, -limit+$Base.position.x, limit+$Base.position.x)
+			#touchPos.y = clamp(touchPos.y, -limit+$Base.position.y, limit+$Base.position.y)
 		
 		#Procura que el movimiento sea más circular
 		auxPosition = touchPos-$Base.position
-		$Base/Joystick.position.x = auxPosition.x * abs(auxPosition.normalized().x)
-		$Base/Joystick.position.y = auxPosition.y * abs(auxPosition.normalized().y)
+		auxPosition = auxPosition.normalized()
+		$Base/Joystick.position.x = auxPosition.x
+		$Base/Joystick.position.y = auxPosition.y 
 		
 
 #Movimiento del personaje
@@ -50,7 +55,6 @@ func _character_control(delta):
 	velocity = Vector2.ZERO
 	if isAreaEntered:
 		velocity = $Base/Joystick.position
-		
 
 func _sprite_control():
 	if velocity.x !=0 or velocity.y!=0:
@@ -64,11 +68,11 @@ func _sprite_control():
 
 func _process(delta):
 	_character_control(delta)
-	_sprite_control()
-	if velocity.length()>0:
-		velocity = velocity.normalized()*speed*delta
-		$Player.position += velocity
-
+#	_sprite_control()
+#	if velocity.length()>0:
+#		velocity = velocity.normalized()*speed*delta
+#		$Player.position += velocity
+	emit_signal("joystick", velocity)
 
 func _on_Player_hard():
 	set_process(false)

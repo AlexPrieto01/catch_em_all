@@ -13,7 +13,7 @@ export(PackedScene) var Cherry
 #vars
 var global
 var Cherry2 = preload("res://gem/Cherry.tscn")
-var stage = 9999
+var stage = 0
 var screenSize = Vector2.ZERO
 var initialTimeLeft
 var score = 0

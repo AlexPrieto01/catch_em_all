@@ -10,7 +10,7 @@
 [ext_resource path="res://enemy/Froggy.tscn" type="PackedScene" id=8]
 [ext_resource path="res://main/TouchScreenButton.gd" type="Script" id=9]
 [ext_resource path="res://icon.png" type="Texture" id=10]
-[ext_resource path="res://assets/grass/istockphoto-1285741031-170667a.jpg" type="Texture" id=11]
+[ext_resource path="res://main/Background.tscn" type="PackedScene" id=11]
 
 [sub_resource type="DynamicFont" id=1]
 size = 38
@@ -44,10 +44,7 @@ Froggy = ExtResource( 8 )
 Gem = ExtResource( 2 )
 Cherry = ExtResource( 7 )
 
-[node name="Background" type="Sprite" parent="."]
-scale = Vector2( 2.1, 1.15 )
-texture = ExtResource( 11 )
-centered = false
+[node name="Background" parent="." instance=ExtResource( 11 )]
 
 [node name="HUD" type="Control" parent="."]
 anchor_right = 1.0
@@ -175,6 +172,11 @@ __meta__ = {
 position = Vector2( -4.48987, 1.12247 )
 shape = SubResource( 3 )
 
+[node name="FroggyBag" type="Node2D" parent="."]
+
+[node name="FroggyBoss" parent="FroggyBag" instance=ExtResource( 8 )]
+position = Vector2( 400, -280 )
+
 [node name="TouchScreenController" type="Node2D" parent="."]
 
 [node name="TouchScreenButton" type="TouchScreenButton" parent="TouchScreenController"]
@@ -190,17 +192,13 @@ scale = Vector2( 1.5, 1.5 )
 texture = ExtResource( 10 )
 
 [node name="Joystick" type="Sprite" parent="TouchScreenController/TouchScreenButton/Base"]
+visible = false
 modulate = Color( 0, 0, 1, 0.392157 )
 scale = Vector2( 0.5, 0.5 )
 texture = ExtResource( 10 )
 
 [node name="Player" parent="TouchScreenController/TouchScreenButton" instance=ExtResource( 3 )]
 position = Vector2( 280.964, 222.717 )
-
-[node name="FroggyBag" type="Node2D" parent="."]
-
-[node name="FroggyBoss" parent="FroggyBag" instance=ExtResource( 8 )]
-position = Vector2( 400, -280 )
 
 [connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
 [connection signal="timeout" from="CherryTimer" to="." method="_on_CherryTimer_timeout"]
