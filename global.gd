@@ -21,13 +21,14 @@ var release_frogs = false
 
 func _ready():
 	randomize()
+	add_child(sound)
 #	_timer_settings()
 #	_music_settings()
 
 func play_music(new_path):
 	if !sound.playing:
 		sound.stream = load(new_path)
-		add_child(sound)
+		
 		sound.play()
 
 func stop_music():
