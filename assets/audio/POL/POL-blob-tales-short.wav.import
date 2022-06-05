@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/POL-blob-tales-short.wav-8bcf3955f4bcdd051338e416e43c7446.sample"
+
+[deps]
+
+source_file="res://assets/audio/POL/POL-blob-tales-short.wav"
+dest_files=[ "res://.import/POL-blob-tales-short.wav-8bcf3955f4bcdd051338e416e43c7446.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=true
+compress/mode=0

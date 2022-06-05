@@ -17,20 +17,23 @@ var stage = 0
 var screenSize = Vector2.ZERO
 var initialTimeLeft
 var score = 0
+var highScore = 0
 var scoreByStage = BASE_GEMS
 var scoreMaxByStage = BASE_GEMS
 var gemsLeft = BASE_GEMS
 var audio
 var auxStr
+var scoreFile
+
 onready var gameOverDelay = Timer.new()
 
 func _ready():
 	#OS.center_window()
 	global = get_node("/root/Global")
 	randomize()
-	initial_settings(global.hard_mode, global.release_frogs)
-	screenSize = Global.screenSize
-	print(str(screenSize))
+	initial_settings(Global.hard_mode, Global.release_frogs)
+	screenSize = global.screenSize
+	_load_score()
 	spawn_gems()
 	set_cherryTime()
 
@@ -49,11 +52,6 @@ func initial_settings(var hard, var frogs):
 func _process(delta):
 	update_platform()
 	check_Stage()
-	_touch_control(InputEventScreenTouch)
-
-func _touch_control(event):
-	if event is InputEventScreenTouch:
-		$Player/AnimatedSprite.play("hurt")
 
 func time_settings(var time):
 	
@@ -85,13 +83,13 @@ func check_Stage():
 		#auxStr = str($GemBag.get_child_count())+"\n"+str(scoreMaxByStage)
 		#$HUD.update_score(auxStr)
 		spawn_gems()
-		if stage%STAGEFORFROG == 0:
+		if stage%STAGEFORFROG == 0 and !Global.release_frogs:
 			spawn_frog()
 		print("Total gems: "+str($GemBag.get_child_count()))
 		
 func spawn_gems():
 	if Gem != null:
-		for i in range(scoreByStage):
+		for _i in range(scoreByStage):
 			var gem = Gem.instance()
 			gem.position = getRandomPosition(50)
 			$GemBag.add_child(gem)
@@ -109,7 +107,7 @@ func spawn_frog():
 		rand_range(0,1)
 	)
 	#Easter egg
-	if stage == 100:
+	if stage == 50:
 		frog.scale = Vector2(5, 5)
 	print(frog.modulate)
 	frog.jump = int(rand_range(-400, -700))
@@ -166,4 +164,23 @@ func _on_CherryTimer_timeout():
 
 
 func _on_Player_hard():
+	Global.stop_music()
+	Global.musicTimer.stop()
+	if int(score) > int(highScore):
+		_save_score()
 	game_over()
+
+func _save_score():
+	scoreFile = File.new()
+	scoreFile.open("user://savefile.save", File.WRITE)
+	scoreFile.store_line(str(score))
+	scoreFile.close()
+
+func _load_score():
+	scoreFile = File.new()
+	if not scoreFile.file_exists("user://savefile.save"):
+		return
+	scoreFile.open("user://savefile.save", File.READ)
+	highScore = scoreFile.get_line()
+	$HUD.update_highScore(highScore)
+	scoreFile.close()

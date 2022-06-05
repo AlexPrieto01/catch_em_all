@@ -3,15 +3,15 @@ extends Node2D
 const pressed = "64ffffff"
 const notPressed = "ffffff"
 
+var hard_mode = Global.hard_mode
+var release_frogs = Global.release_frogs
 var global
-var hard_mode
-var release_frogs
 
 func _ready():
 	OS.center_window()
 	global = get_node("/root/Global")
-	_checkHardButton(global.hard_mode)
-	_checkFrogButton(global.release_frogs)
+	_checkHardButton(hard_mode)
+	_checkFrogButton(release_frogs)
 
 func _checkHardButton(var hard):
 	if hard:

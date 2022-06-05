@@ -106,5 +106,4 @@ func _on_Player_body_entered(body):
 		emit_signal("hard") 
 
 func _on_joystick_signal(new_velocity):
-	print(new_velocity)
 	velocity = new_velocity

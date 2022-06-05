@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=2]
+[gd_scene load_steps=18 format=2]
 
 [ext_resource path="res://main/Main.gd" type="Script" id=1]
 [ext_resource path="res://gem/Gem.tscn" type="PackedScene" id=2]
@@ -14,6 +14,10 @@
 
 [sub_resource type="DynamicFont" id=1]
 size = 38
+font_data = ExtResource( 4 )
+
+[sub_resource type="DynamicFont" id=6]
+size = 36
 font_data = ExtResource( 4 )
 
 [sub_resource type="DynamicFont" id=2]
@@ -89,6 +93,15 @@ custom_constants/shadow_offset_y = 0
 text = "0"
 align = 1
 
+[node name="LabelHighScore" type="Label" parent="HUD/MarginContainer"]
+margin_left = 10.0
+margin_top = 42.0
+margin_right = 834.0
+margin_bottom = 96.0
+custom_fonts/font = SubResource( 6 )
+text = "0"
+align = 2
+
 [node name="LabelStage" type="Label" parent="HUD"]
 anchor_left = 0.5
 anchor_top = 0.5
@@ -122,7 +135,7 @@ one_shot = true
 [node name="Plataforms" type="Node2D" parent="."]
 
 [node name="Platform0" type="StaticBody2D" parent="Plataforms"]
-position = Vector2( 734.652, 399.292 )
+position = Vector2( 678.438, 397.957 )
 __meta__ = {
 "_edit_group_": true
 }

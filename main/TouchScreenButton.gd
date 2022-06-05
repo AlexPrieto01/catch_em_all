@@ -8,6 +8,7 @@ var screenSize = Vector2.ZERO
 var touchPos = null
 var basePos = Vector2.ZERO
 var isAreaEntered = false
+var isNotProcessing = true
 #Player vars
 var velocity = Vector2.ZERO
 var speed = 400
@@ -31,7 +32,8 @@ func _on_TouchScreenButton_released():
 	
 
 func _input(event):
-	if isAreaEntered and InputEventScreenTouch:
+	if isAreaEntered and InputEventScreenTouch and isNotProcessing:
+		isNotProcessing = false
 		if touchPos==null and !$Base.visible: 
 			touchPos = event.get_position() 
 			basePos = touchPos
@@ -48,7 +50,7 @@ func _input(event):
 		auxPosition = auxPosition.normalized()
 		$Base/Joystick.position.x = auxPosition.x
 		$Base/Joystick.position.y = auxPosition.y 
-		
+		isNotProcessing = true
 
 #Movimiento del personaje
 func _character_control(delta):
