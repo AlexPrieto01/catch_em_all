@@ -14,6 +14,7 @@ export(PackedScene) var Cherry
 var global
 var Cherry2 = preload("res://gem/Cherry.tscn")
 var stage = 0
+var stageForFrog = STAGEFORFROG
 var screenSize = Vector2.ZERO
 var initialTimeLeft
 var score = 0
@@ -40,10 +41,9 @@ func _ready():
 func initial_settings(var hard, var frogs):
 	if hard:
 		time_settings(5)
-		pass
+		stageForFrog = 1
 	else:
 		time_settings(20)
-		pass
 	
 	if frogs:
 		$FroggyBag.queue_free()
@@ -83,7 +83,7 @@ func check_Stage():
 		#auxStr = str($GemBag.get_child_count())+"\n"+str(scoreMaxByStage)
 		#$HUD.update_score(auxStr)
 		spawn_gems()
-		if stage%STAGEFORFROG == 0 and !Global.release_frogs:
+		if stage%stageForFrog == 0 and !Global.release_frogs:
 			spawn_frog()
 		print("Total gems: "+str($GemBag.get_child_count()))
 		
@@ -102,12 +102,12 @@ func spawn_frog():
 			screenSize.x-Global.marginScreen),
 		FROGGY_HIGH)
 	frog.modulate = Color(
-		rand_range(0,1),
-		rand_range(0,1),
-		rand_range(0,1)
+		randf(),
+		randf(),
+		randf()
 	)
 	#Easter egg
-	if stage == 50:
+	if stage == stageForFrog*5:
 		frog.scale = Vector2(5, 5)
 	print(frog.modulate)
 	frog.jump = int(rand_range(-400, -700))
@@ -139,7 +139,6 @@ func _on_Player_picked(type): #type gem or cherry
 		"cherry":
 			$TouchScreenController/TouchScreenButton/Player._powerUp_Start()
 	
-
 func game_over():
 	$HUD.update_stage("You lose!")
 	$Timer.stop()

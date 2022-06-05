@@ -99,6 +99,7 @@ func game_over():
 	set_process(false)
 	$HitAudio.play()
 	$AnimatedSprite.animation = "hurt"
+	$CollisionShape2D.queue_free()
 
 
 func _on_Player_body_entered(body):
