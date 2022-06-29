@@ -72,9 +72,9 @@ func _limit_control():
 
 
 func _on_Player_area_entered(area):
-	if area.is_in_group("gem"):
-		$GemAudio.play()
-		emit_signal("picked", "gem")
+	if area.is_in_group("food"):
+		$FoodAudio.play()
+		emit_signal("picked", "food")
 		
 	elif area.is_in_group("cherry"):
 		$CherryAudio.play()

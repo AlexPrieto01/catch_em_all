@@ -34,14 +34,14 @@ centered = false
 [node name="LabelTitle" type="Label" parent="."]
 anchor_left = 0.5
 anchor_right = 0.5
-margin_left = -225.0
-margin_top = 60.0
-margin_right = 225.0
-margin_bottom = 225.0
+margin_left = -262.0
+margin_top = 58.0
+margin_right = 264.0
+margin_bottom = 223.0
 custom_fonts/font = SubResource( 1 )
 text = "Are you ready
-for
-Catch Em All!"
+to
+dodge the frogs?!"
 align = 1
 __meta__ = {
 "_edit_use_anchors_": false

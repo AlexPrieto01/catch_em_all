@@ -54,10 +54,9 @@ shape = SubResource( 1 )
 position = Vector2( -2, 0 )
 frames = SubResource( 2 )
 animation = "idle"
-frame = 3
 playing = true
 
-[node name="GemAudio" type="AudioStreamPlayer" parent="."]
+[node name="FoodAudio" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 14 )
 
 [node name="HitAudio" type="AudioStreamPlayer" parent="."]

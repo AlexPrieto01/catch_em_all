@@ -21,7 +21,7 @@ var score = 0
 var highScore = 0
 var scoreByStage = BASE_GEMS
 var scoreMaxByStage = BASE_GEMS
-var gemsLeft = BASE_GEMS
+var foodLeft = BASE_GEMS
 var audio
 var auxStr
 var scoreFile
@@ -35,7 +35,7 @@ func _ready():
 	initial_settings(Global.hard_mode, Global.release_frogs)
 	screenSize = global.screenSize
 	_load_score()
-	spawn_gems()
+	spawn_food()
 	set_cherryTime()
 
 func initial_settings(var hard, var frogs):
@@ -49,7 +49,7 @@ func initial_settings(var hard, var frogs):
 		$FroggyBag.queue_free()
 		$Platform.queue_free()
 
-func _process(delta):
+func _process(_delta):
 	update_platform()
 	check_Stage()
 
@@ -66,7 +66,7 @@ func _on_gameOverDelay_timeout():
 	get_tree().change_scene("res://menu/Control.tscn")
 
 func check_Stage():
-	if $GemBag.get_child_count() == 0:
+	if $FoodBag.get_child_count() == 0:
 		#Update stage and time bonus
 		stage+=1
 		initialTimeLeft += BONUS_TIME
@@ -82,17 +82,17 @@ func check_Stage():
 		
 		#auxStr = str($GemBag.get_child_count())+"\n"+str(scoreMaxByStage)
 		#$HUD.update_score(auxStr)
-		spawn_gems()
+		spawn_food()
 		if stage%stageForFrog == 0 and !Global.release_frogs:
 			spawn_frog()
-		print("Total gems: "+str($GemBag.get_child_count()))
+		print("Total gems: "+str($FoodBag.get_child_count()))
 		
-func spawn_gems():
+func spawn_food():
 	if Gem != null:
 		for _i in range(scoreByStage):
 			var gem = Gem.instance()
 			gem.position = getRandomPosition(50)
-			$GemBag.add_child(gem)
+			$FoodBag.add_child(gem)
 
 func spawn_frog():
 	var frog = Froggy.instance()
@@ -128,13 +128,12 @@ func _on_Timer_timeout():
 
 
 func _on_Player_picked(type): #type gem or cherry
-	
 	match type:
-		"gem":
+		"food":
 			score += 1
 			auxStr = str(score)+"\n"+str(scoreMaxByStage)
 			$HUD.update_score(auxStr)
-			gemsLeft-=1
+			foodLeft-=1
 			#print("Gems left: "+str(gemsLeft))
 		"cherry":
 			$TouchScreenController/TouchScreenButton/Player._powerUp_Start()

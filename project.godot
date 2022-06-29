@@ -10,9 +10,9 @@ config_version=4
 
 [application]
 
-config/name="Catch Em All"
+config/name="Too many frogs!"
 run/main_scene="res://menu/Control.tscn"
-config/icon="res://assets/player/idle/player-idle-1.png"
+config/icon="res://assets/player/2 Owlet_Monster/Owlet_Monster.png"
 
 [autoload]
 

@@ -1,8 +1,8 @@
 [gd_scene load_steps=18 format=2]
 
 [ext_resource path="res://main/Main.gd" type="Script" id=1]
-[ext_resource path="res://gem/Gem.tscn" type="PackedScene" id=2]
-[ext_resource path="res://player/Player.tscn" type="PackedScene" id=3]
+[ext_resource path="res://gem/Food.tscn" type="PackedScene" id=2]
+[ext_resource path="res://player/owl_player.tscn" type="PackedScene" id=3]
 [ext_resource path="res://assets/Kenney Bold.ttf" type="DynamicFontData" id=4]
 [ext_resource path="res://main/HUD.gd" type="Script" id=5]
 [ext_resource path="res://assets/audio/Level.wav" type="AudioStream" id=6]
@@ -10,7 +10,7 @@
 [ext_resource path="res://enemy/Froggy.tscn" type="PackedScene" id=8]
 [ext_resource path="res://main/TouchScreenButton.gd" type="Script" id=9]
 [ext_resource path="res://icon.png" type="Texture" id=10]
-[ext_resource path="res://main/Background.tscn" type="PackedScene" id=11]
+[ext_resource path="res://scenario/Scenario.tscn" type="PackedScene" id=11]
 
 [sub_resource type="DynamicFont" id=1]
 size = 38
@@ -48,13 +48,12 @@ Froggy = ExtResource( 8 )
 Gem = ExtResource( 2 )
 Cherry = ExtResource( 7 )
 
-[node name="Background" parent="." instance=ExtResource( 11 )]
+[node name="Scenario_1" parent="." instance=ExtResource( 11 )]
 
 [node name="HUD" type="Control" parent="."]
-anchor_right = 1.0
-margin_left = -1.49832
+margin_left = -0.99832
 margin_top = -6.61143
-margin_right = 852.502
+margin_right = 853.002
 margin_bottom = 473.389
 script = ExtResource( 5 )
 __meta__ = {
@@ -112,8 +111,7 @@ margin_top = -81.531
 margin_right = 224.0
 margin_bottom = 104.469
 custom_fonts/font = SubResource( 3 )
-text = "Catch Em 
-All!!!!
+text = "LET'S GO!
 "
 align = 1
 valign = 1
@@ -124,7 +122,7 @@ __meta__ = {
 [node name="Timer" type="Timer" parent="."]
 autostart = true
 
-[node name="GemBag" type="Node2D" parent="."]
+[node name="FoodBag" type="Node2D" parent="."]
 
 [node name="StageUp" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 6 )
@@ -143,6 +141,7 @@ __meta__ = {
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Plataforms/Platform0"]
 position = Vector2( -4.48987, 1.12247 )
 shape = SubResource( 4 )
+one_way_collision = true
 
 [node name="Platform1" type="StaticBody2D" parent="Plataforms"]
 position = Vector2( 212.596, 318.491 )
@@ -153,6 +152,7 @@ __meta__ = {
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Plataforms/Platform1"]
 position = Vector2( -4.48987, 1.12247 )
 shape = SubResource( 4 )
+one_way_collision = true
 
 [node name="Plataform2" type="StaticBody2D" parent="Plataforms"]
 position = Vector2( 568.364, 252.551 )
@@ -163,6 +163,7 @@ __meta__ = {
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Plataforms/Plataform2"]
 position = Vector2( -4.48987, 1.12247 )
 shape = SubResource( 4 )
+one_way_collision = true
 
 [node name="Platform3" type="StaticBody2D" parent="Plataforms"]
 position = Vector2( 298.941, 120.561 )
@@ -173,6 +174,7 @@ __meta__ = {
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Plataforms/Platform3"]
 position = Vector2( -4.48987, 1.12247 )
 shape = SubResource( 4 )
+one_way_collision = true
 
 [node name="Platform" type="StaticBody2D" parent="."]
 position = Vector2( 564.224, 475.801 )
@@ -184,6 +186,7 @@ __meta__ = {
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Platform"]
 position = Vector2( -4.48987, 1.12247 )
 shape = SubResource( 4 )
+one_way_collision = true
 
 [node name="FroggyBag" type="Node2D" parent="."]
 
@@ -211,12 +214,11 @@ scale = Vector2( 0.5, 0.5 )
 texture = ExtResource( 10 )
 
 [node name="Player" parent="TouchScreenController/TouchScreenButton" instance=ExtResource( 3 )]
-position = Vector2( 280.964, 222.717 )
+position = Vector2( 320.197, 228.417 )
 
 [connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
 [connection signal="timeout" from="CherryTimer" to="." method="_on_CherryTimer_timeout"]
 [connection signal="pressed" from="TouchScreenController/TouchScreenButton" to="TouchScreenController/TouchScreenButton" method="_on_TouchScreenButton_pressed"]
 [connection signal="released" from="TouchScreenController/TouchScreenButton" to="TouchScreenController/TouchScreenButton" method="_on_TouchScreenButton_released"]
 [connection signal="hard" from="TouchScreenController/TouchScreenButton/Player" to="." method="_on_Player_hard"]
-[connection signal="hard" from="TouchScreenController/TouchScreenButton/Player" to="TouchScreenController/TouchScreenButton" method="_on_Player_hard"]
 [connection signal="picked" from="TouchScreenController/TouchScreenButton/Player" to="." method="_on_Player_picked"]
