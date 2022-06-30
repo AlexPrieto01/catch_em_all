@@ -44,13 +44,3 @@ func takeRandomPath():
 func _music_settings():
 	sound.connect("finished", self, "_on_music_finished")
 
-#func _on_music_finished():
-#	if makeNewMusic and actualMusic != controlMusic_path:
-#		change_musicTo(takeRandomPath())
-
-#func _timer_settings():
-#	musicTimer.wait_time = 20
-#	musicTimer.connect("timeout", self, "_on_Timer_timeout")
-
-#func _on_Timer_timeout():
-#	makeNewMusic = true

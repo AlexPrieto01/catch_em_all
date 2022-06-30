@@ -2,13 +2,13 @@ extends Node2D
 
 #signals
 #constants
-const BASE_GEMS = 5
+const BASE_FOOD = 5
 const BONUS_TIME = 10
 const FROGGY_HIGH = -280
 const STAGEFORFROG = 5
 #exports
 export(PackedScene) var Froggy
-export(PackedScene) var Gem
+export(PackedScene) var Food
 export(PackedScene) var Cherry
 #vars
 var global
@@ -19,9 +19,9 @@ var screenSize = Vector2.ZERO
 var initialTimeLeft
 var score = 0
 var highScore = 0
-var scoreByStage = BASE_GEMS
-var scoreMaxByStage = BASE_GEMS
-var foodLeft = BASE_GEMS
+var scoreByStage = BASE_FOOD
+var scoreMaxByStage = BASE_FOOD
+var foodLeft = BASE_FOOD
 var audio
 var auxStr
 var scoreFile
@@ -57,7 +57,7 @@ func time_settings(var time):
 	
 	initialTimeLeft = time
 	
-	$HUD.update_timer(initialTimeLeft)
+	$HUD_Node/HUD.update_timer(initialTimeLeft)
 	gameOverDelay.wait_time = 2
 	gameOverDelay.connect("timeout", self, "_on_gameOverDelay_timeout")
 	self.add_child(gameOverDelay)
@@ -75,24 +75,23 @@ func check_Stage():
 #		audio.stream = load("res://assets/audio/Level.wav")
 #		add_child(audio)
 #		audio.play()
-		$HUD.update_stage("Stage "+str(stage))
-		scoreByStage = BASE_GEMS+stage
+		$HUD_Node/HUD.update_stage("Stage "+str(stage))
+		scoreByStage = BASE_FOOD+stage
 		scoreMaxByStage += scoreByStage
 		#gemsLeft = scoreByStage
 		
 		#auxStr = str($GemBag.get_child_count())+"\n"+str(scoreMaxByStage)
-		#$HUD.update_score(auxStr)
+		#$HUD_Node/HUD.update_score(auxStr)
 		spawn_food()
 		if stage%stageForFrog == 0 and !Global.release_frogs:
 			spawn_frog()
-		print("Total gems: "+str($FoodBag.get_child_count()))
 		
 func spawn_food():
-	if Gem != null:
+	if Food != null:
 		for _i in range(scoreByStage):
-			var gem = Gem.instance()
-			gem.position = getRandomPosition(50)
-			$FoodBag.add_child(gem)
+			var food = Food.instance()
+			food.position = getRandomPosition(50)
+			$FoodBag.add_child(food)
 
 func spawn_frog():
 	var frog = Froggy.instance()
@@ -122,24 +121,23 @@ func update_platform():
 func _on_Timer_timeout():
 	initialTimeLeft -= 1
 	if initialTimeLeft >= 0:
-		$HUD.update_timer(initialTimeLeft)
+		$HUD_Node/HUD.update_timer(initialTimeLeft)
 	else:
 		game_over()
 
 
-func _on_Player_picked(type): #type gem or cherry
+func _on_Player_picked(type): #type food or cherry
 	match type:
 		"food":
 			score += 1
 			auxStr = str(score)+"\n"+str(scoreMaxByStage)
-			$HUD.update_score(auxStr)
+			$HUD_Node/HUD.update_score(auxStr)
 			foodLeft-=1
-			#print("Gems left: "+str(gemsLeft))
 		"cherry":
 			$TouchScreenController/TouchScreenButton/Player._powerUp_Start()
 	
 func game_over():
-	$HUD.update_stage("You lose!")
+	$HUD_Node/HUD.update_stage("You lose!")
 	$Timer.stop()
 	$TouchScreenController/TouchScreenButton/Player.game_over()
 	set_process(false)
@@ -180,5 +178,5 @@ func _load_score():
 		return
 	scoreFile.open("user://savefile.save", File.READ)
 	highScore = scoreFile.get_line()
-	$HUD.update_highScore(highScore)
+	$HUD_Node/HUD.update_highScore(highScore)
 	scoreFile.close()

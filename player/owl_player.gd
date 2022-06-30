@@ -3,17 +3,18 @@ extends Area2D
 signal picked
 signal hard
 #constants
-var marginScreen
+const marginScreen = Global.marginScreen
+const screenSize = Global.screenSize
+const high_speed = 600
+const normal_speed = 400
 #var
 var velocity = Vector2.ZERO
-var screenSize
-var speed = 400
+var speed = normal_speed
 var turbo
 var hurt
 
 func _ready():
-	marginScreen = Global.marginScreen
-	screenSize = Global.screenSize
+	pass
 	
 func _process(delta):
 	#_character_control()
@@ -71,11 +72,8 @@ func _limit_control():
 #		position.y=0
 
 func _powerUp_Start():
-	speed=600
+	speed=high_speed
 	$powerUp.start()
-	
-func _powerUp_End():
-	speed=400
 
 func game_over():
 	set_process(false)
@@ -106,4 +104,7 @@ func _on_Owl_player_body_entered(body):
 	if body.is_in_group("enemy"):
 		emit_signal("hard") 
 	if body.get_name() == "plants":
-		z_index = -2
+		pass
+
+func _on_powerUp_timeout():
+	speed = normal_speed

@@ -18,7 +18,6 @@ var auxPosition
 func _ready():
 	screenSize = Global.screenSize
 	shape.extents = screenSize
-	
 	connect("joystick", $Player, "_on_joystick_signal")
 	
 
@@ -70,10 +69,6 @@ func _sprite_control():
 
 func _process(delta):
 	_character_control(delta)
-#	_sprite_control()
-#	if velocity.length()>0:
-#		velocity = velocity.normalized()*speed*delta
-#		$Player.position += velocity
 	emit_signal("joystick", velocity)
 
 func _on_Player_hard():

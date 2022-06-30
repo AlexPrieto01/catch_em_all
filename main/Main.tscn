@@ -1,7 +1,7 @@
 [gd_scene load_steps=18 format=2]
 
 [ext_resource path="res://main/Main.gd" type="Script" id=1]
-[ext_resource path="res://gem/Food.tscn" type="PackedScene" id=2]
+[ext_resource path="res://food/Food.tscn" type="PackedScene" id=2]
 [ext_resource path="res://player/owl_player.tscn" type="PackedScene" id=3]
 [ext_resource path="res://assets/Kenney Bold.ttf" type="DynamicFontData" id=4]
 [ext_resource path="res://main/HUD.gd" type="Script" id=5]
@@ -45,12 +45,14 @@ func _process(delta):
 [node name="Main" type="Node2D"]
 script = ExtResource( 1 )
 Froggy = ExtResource( 8 )
-Gem = ExtResource( 2 )
+Food = ExtResource( 2 )
 Cherry = ExtResource( 7 )
 
 [node name="Scenario_1" parent="." instance=ExtResource( 11 )]
 
-[node name="HUD" type="Control" parent="."]
+[node name="HUD_Node" type="Node2D" parent="."]
+
+[node name="HUD" type="Control" parent="HUD_Node"]
 margin_left = -0.99832
 margin_top = -6.61143
 margin_right = 853.002
@@ -60,7 +62,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="MarginContainer" type="MarginContainer" parent="HUD"]
+[node name="MarginContainer" type="MarginContainer" parent="HUD_Node/HUD"]
 anchor_right = 1.0
 margin_right = -10.0
 margin_bottom = 139.0
@@ -72,7 +74,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="LabelScore" type="Label" parent="HUD/MarginContainer"]
+[node name="LabelScore" type="Label" parent="HUD_Node/HUD/MarginContainer"]
 margin_left = 10.0
 margin_top = 10.0
 margin_right = 834.0
@@ -81,7 +83,7 @@ custom_fonts/font = SubResource( 1 )
 text = "0
 5"
 
-[node name="LabelTimer" type="Label" parent="HUD/MarginContainer"]
+[node name="LabelTimer" type="Label" parent="HUD_Node/HUD/MarginContainer"]
 margin_left = 10.0
 margin_top = 40.0
 margin_right = 834.0
@@ -92,7 +94,7 @@ custom_constants/shadow_offset_y = 0
 text = "0"
 align = 1
 
-[node name="LabelHighScore" type="Label" parent="HUD/MarginContainer"]
+[node name="LabelHighScore" type="Label" parent="HUD_Node/HUD/MarginContainer"]
 margin_left = 10.0
 margin_top = 42.0
 margin_right = 834.0
@@ -101,7 +103,7 @@ custom_fonts/font = SubResource( 2 )
 text = "0"
 align = 2
 
-[node name="LabelStage" type="Label" parent="HUD"]
+[node name="LabelStage" type="Label" parent="HUD_Node/HUD"]
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
@@ -214,7 +216,8 @@ scale = Vector2( 0.5, 0.5 )
 texture = ExtResource( 10 )
 
 [node name="Player" parent="TouchScreenController/TouchScreenButton" instance=ExtResource( 3 )]
-position = Vector2( 320.197, 228.417 )
+position = Vector2( 353.495, 211.768 )
+z_index = 1
 
 [connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
 [connection signal="timeout" from="CherryTimer" to="." method="_on_CherryTimer_timeout"]
