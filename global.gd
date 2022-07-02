@@ -41,6 +41,4 @@ func change_musicTo(new_path):
 func takeRandomPath():
 	return songsCollection[rand_range(0,songsCollection.size())]
 
-func _music_settings():
-	sound.connect("finished", self, "_on_music_finished")
 

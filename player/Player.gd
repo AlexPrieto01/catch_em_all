@@ -82,9 +82,7 @@ func _on_Player_area_entered(area):
 		
 	if area.has_method("pickup"):
 		area.pickup()
-		
-	elif area.is_in_group("collision"):
-		pass
+
 
 
 

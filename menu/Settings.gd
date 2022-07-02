@@ -10,19 +10,19 @@ var global
 func _ready():
 	OS.center_window()
 	global = get_node("/root/Global")
-	_checkHardButton(hard_mode)
-	_checkFrogButton(release_frogs)
+	_checkHardButton()
+	_checkFrogButton()
 
-func _checkHardButton(var hard):
-	if hard:
+func _checkHardButton():
+	if hard_mode:
 		$Difficulty/EasyGame.set_modulate(notPressed) 
 		$Difficulty/HardGame.set_modulate(pressed)
 	else:
 		$Difficulty/EasyGame.set_modulate(pressed)
 		$Difficulty/HardGame.set_modulate(notPressed)
 	
-func _checkFrogButton(var frog):
-	if frog:
+func _checkFrogButton():
+	if release_frogs:
 		$Frogs/KeepFrogs.set_modulate(notPressed)
 		$Frogs/NoMoreFrogs.set_modulate(pressed)
 	else:
@@ -31,19 +31,19 @@ func _checkFrogButton(var frog):
 
 func _on_HardGame_pressed():
 	hard_mode = true
-	_checkHardButton(hard_mode)
+	_checkHardButton()
 
 func _on_EasyGame_pressed():
 	hard_mode = false
-	_checkHardButton(hard_mode)
+	_checkHardButton()
 
 func _on_KeepFrogs_pressed():
 	release_frogs = false
-	_checkFrogButton(release_frogs)
+	_checkFrogButton()
 
 func _on_NoMoreFrogs_pressed():
 	release_frogs = true
-	_checkFrogButton(release_frogs)
+	_checkFrogButton()
 
 func _on_Back_pressed():
 	global.hard_mode = hard_mode

@@ -12,7 +12,7 @@ export(PackedScene) var Food
 export(PackedScene) var Cherry
 #vars
 var global
-var Cherry2 = preload("res://gem/Cherry.tscn")
+#var Cherry2 = preload("res://gem/Cherry.tscn")
 var stage = 0
 var stageForFrog = STAGEFORFROG
 var screenSize = Vector2.ZERO
@@ -30,10 +30,9 @@ onready var gameOverDelay = Timer.new()
 
 func _ready():
 	#OS.center_window()
-	global = get_node("/root/Global")
-	randomize()
+	randomize() #Genera aleatoriedad cada vez que se ejecute
+	screenSize = Global.screenSize
 	initial_settings(Global.hard_mode, Global.release_frogs)
-	screenSize = global.screenSize
 	_load_score()
 	spawn_food()
 	set_cherryTime()
@@ -114,7 +113,7 @@ func spawn_frog():
 	$FroggyBag.add_child(frog)
 
 func update_platform():
-	if !global.release_frogs:
+	if !Global.release_frogs:
 		$Platform.position.x = $FroggyBag/FroggyBoss.position.x
 	
 
@@ -152,8 +151,9 @@ func getRandomPosition(red):
 	return Vector2(rand_range(red,screenSize.x-red), rand_range(red,screenSize.y-red))
 
 func _on_CherryTimer_timeout():
-	if Cherry2 != null:
-		var cherry = Cherry2.instance()
+	if Cherry != null:
+		var cherry = Cherry.instance()
+		#var cherry = Cherry2.instance() 
 		cherry.position = getRandomPosition(-50)
 		add_child(cherry)
 		set_cherryTime()

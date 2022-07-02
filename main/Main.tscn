@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=2]
+[gd_scene load_steps=17 format=2]
 
 [ext_resource path="res://main/Main.gd" type="Script" id=1]
 [ext_resource path="res://food/Food.tscn" type="PackedScene" id=2]
@@ -26,19 +26,6 @@ font_data = ExtResource( 4 )
 
 [sub_resource type="RectangleShape2D" id=4]
 extents = Vector2( 147.253, 3.83765 )
-
-[sub_resource type="GDScript" id=5]
-script/source = "extends StaticBody2D
-
-const position_Y = 636
-
-func _ready():
-	pass 
-func _process(delta):
-	position.x = position.x 
-
-
-"
 
 [sub_resource type="RectangleShape2D" id=6]
 
@@ -180,7 +167,6 @@ one_way_collision = true
 
 [node name="Platform" type="StaticBody2D" parent="."]
 position = Vector2( 564.224, 475.801 )
-script = SubResource( 5 )
 __meta__ = {
 "_edit_group_": true
 }

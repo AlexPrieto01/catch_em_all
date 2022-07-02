@@ -52,23 +52,13 @@ func _input(event):
 		isNotProcessing = true
 
 #Movimiento del personaje
-func _character_control(delta):
+func _character_control():
 	velocity = Vector2.ZERO
 	if isAreaEntered:
 		velocity = $Base/Joystick.position
 
-func _sprite_control():
-	if velocity.x !=0 or velocity.y!=0:
-		if velocity.x<0:
-			$Player/AnimatedSprite.flip_h=true
-		elif velocity.x>0:
-			$Player/AnimatedSprite.flip_h=false
-		$Player/AnimatedSprite.play("run")
-	else:
-		$Player/AnimatedSprite.play("idle")
-
 func _process(delta):
-	_character_control(delta)
+	_character_control()
 	emit_signal("joystick", velocity)
 
 func _on_Player_hard():
