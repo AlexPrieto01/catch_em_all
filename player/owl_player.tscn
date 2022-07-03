@@ -4,9 +4,9 @@
 [ext_resource path="res://assets/audio/VUX-Bite.wav" type="AudioStream" id=2]
 [ext_resource path="res://assets/audio/Hit.wav" type="AudioStream" id=3]
 [ext_resource path="res://assets/audio/Powerup.wav" type="AudioStream" id=4]
-[ext_resource path="res://assets/player/2 Owlet_Monster/Owlet_Monster_Death_8.png" type="Texture" id=5]
-[ext_resource path="res://assets/player/2 Owlet_Monster/Owlet_Monster_Idle_4.png" type="Texture" id=6]
-[ext_resource path="res://assets/player/2 Owlet_Monster/Owlet_Monster_Run_6.png" type="Texture" id=7]
+[ext_resource path="res://assets/player/Owlet_Monster/Owlet_Monster_Death_8.png" type="Texture" id=5]
+[ext_resource path="res://assets/player/Owlet_Monster/Owlet_Monster_Idle_4.png" type="Texture" id=6]
+[ext_resource path="res://assets/player/Owlet_Monster/Owlet_Monster_Run_6.png" type="Texture" id=7]
 
 [sub_resource type="CapsuleShape2D" id=1]
 radius = 7.68462
@@ -99,7 +99,7 @@ animations = [ {
 "frames": [ SubResource( 12 ), SubResource( 13 ), SubResource( 14 ), SubResource( 15 ), SubResource( 16 ), SubResource( 17 ), SubResource( 18 ), SubResource( 19 ) ],
 "loop": false,
 "name": "hurt",
-"speed": 10.0
+"speed": 9.0
 } ]
 
 [node name="Owl_player" type="Area2D"]
@@ -113,8 +113,8 @@ shape = SubResource( 1 )
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 position = Vector2( -2, 0 )
 frames = SubResource( 20 )
-animation = "idle"
-frame = 2
+animation = "hurt"
+frame = 7
 playing = true
 
 [node name="FoodAudio" type="AudioStreamPlayer" parent="."]

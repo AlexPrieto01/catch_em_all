@@ -27,7 +27,7 @@ font_data = ExtResource( 4 )
 [sub_resource type="RectangleShape2D" id=4]
 extents = Vector2( 147.253, 3.83765 )
 
-[sub_resource type="RectangleShape2D" id=6]
+[sub_resource type="RectangleShape2D" id=5]
 
 [node name="Main" type="Node2D"]
 script = ExtResource( 1 )
@@ -185,7 +185,7 @@ position = Vector2( 400, -280 )
 
 [node name="TouchScreenButton" type="TouchScreenButton" parent="TouchScreenController"]
 position = Vector2( 3.05176e-05, 3.05176e-05 )
-shape = SubResource( 6 )
+shape = SubResource( 5 )
 script = ExtResource( 9 )
 
 [node name="Base" type="Sprite" parent="TouchScreenController/TouchScreenButton"]
