@@ -103,8 +103,6 @@ func _on_Owl_player_body_entered(body):
 	print(body.get_name())
 	if body.is_in_group("enemy"):
 		emit_signal("hard") 
-	if body.get_name() == "plants":
-		pass
 
 func _on_powerUp_timeout():
 	speed = normal_speed

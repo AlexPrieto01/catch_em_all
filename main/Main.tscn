@@ -6,7 +6,7 @@
 [ext_resource path="res://assets/Kenney Bold.ttf" type="DynamicFontData" id=4]
 [ext_resource path="res://main/HUD.gd" type="Script" id=5]
 [ext_resource path="res://assets/audio/Level.wav" type="AudioStream" id=6]
-[ext_resource path="res://gem/Cherry.tscn" type="PackedScene" id=7]
+[ext_resource path="res://cherry/Cherry.tscn" type="PackedScene" id=7]
 [ext_resource path="res://enemy/Froggy.tscn" type="PackedScene" id=8]
 [ext_resource path="res://main/TouchScreenButton.gd" type="Script" id=9]
 [ext_resource path="res://icon.png" type="Texture" id=10]
@@ -202,8 +202,7 @@ scale = Vector2( 0.5, 0.5 )
 texture = ExtResource( 10 )
 
 [node name="Player" parent="TouchScreenController/TouchScreenButton" instance=ExtResource( 3 )]
-position = Vector2( 353.495, 211.768 )
-z_index = 1
+position = Vector2( 332.619, 217.966 )
 
 [connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
 [connection signal="timeout" from="CherryTimer" to="." method="_on_CherryTimer_timeout"]

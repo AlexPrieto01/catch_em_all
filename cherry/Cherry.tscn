@@ -1,6 +1,6 @@
 [gd_scene load_steps=9 format=2]
 
-[ext_resource path="res://gem/Cherry.gd" type="Script" id=1]
+[ext_resource path="res://cherry/Cherry.gd" type="Script" id=1]
 [ext_resource path="res://assets/cherry/cherry-01.png" type="Texture" id=2]
 [ext_resource path="res://assets/cherry/cherry-04.png" type="Texture" id=3]
 [ext_resource path="res://assets/cherry/cherry-03.png" type="Texture" id=4]
