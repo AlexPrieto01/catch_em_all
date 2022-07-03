@@ -114,7 +114,6 @@ shape = SubResource( 1 )
 position = Vector2( -2, 0 )
 frames = SubResource( 20 )
 animation = "run"
-frame = 2
 playing = true
 
 [node name="FoodAudio" type="AudioStreamPlayer" parent="."]

@@ -54,7 +54,7 @@ radius = 24.1427
 [node name="Food" type="Area2D" groups=[
 "food",
 ]]
-position = Vector2( 35.3576, 22.4492 )
+position = Vector2( 427.445, 203.413 )
 scale = Vector2( 1.5, 1.5 )
 script = ExtResource( 6 )
 __meta__ = {

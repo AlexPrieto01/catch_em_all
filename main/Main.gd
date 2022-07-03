@@ -131,6 +131,8 @@ func _on_Player_picked(type): #type food or cherry
 			$TouchScreenController/TouchScreenButton/Player._powerUp_Start()
 	
 func game_over():
+	Global.stop_music()
+	Global.musicTimer.stop()
 	$HUD_Node/HUD.update_stage("You lose!")
 	$Timer.stop()
 	$TouchScreenController/TouchScreenButton/Player.game_over()
@@ -155,8 +157,6 @@ func _on_CherryTimer_timeout():
 
 
 func _on_Player_hard():
-	Global.stop_music()
-	Global.musicTimer.stop()
 	if int(score) > int(highScore):
 		_save_score()
 	game_over()

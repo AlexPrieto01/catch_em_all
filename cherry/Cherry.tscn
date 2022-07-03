@@ -29,7 +29,7 @@ __meta__ = {
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 scale = Vector2( 2.5, 2.5 )
 frames = SubResource( 1 )
-frame = 3
+frame = 2
 playing = true
 
 [node name="GemHitbox" type="CollisionShape2D" parent="."]
