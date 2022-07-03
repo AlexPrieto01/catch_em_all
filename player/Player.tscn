@@ -1,17 +1,8 @@
-[gd_scene load_steps=19 format=2]
+[gd_scene load_steps=28 format=2]
 
-[ext_resource path="res://assets/player/run/player-run-6.png" type="Texture" id=1]
-[ext_resource path="res://assets/player/run/player-run-1.png" type="Texture" id=2]
-[ext_resource path="res://assets/player/run/player-run-3.png" type="Texture" id=3]
-[ext_resource path="res://assets/player/hurt/player-hurt-2.png" type="Texture" id=4]
-[ext_resource path="res://assets/player/run/player-run-5.png" type="Texture" id=5]
-[ext_resource path="res://assets/player/idle/player-idle-3.png" type="Texture" id=6]
-[ext_resource path="res://assets/player/idle/player-idle-4.png" type="Texture" id=7]
-[ext_resource path="res://assets/player/run/player-run-2.png" type="Texture" id=8]
-[ext_resource path="res://assets/player/run/player-run-4.png" type="Texture" id=9]
-[ext_resource path="res://assets/player/idle/player-idle-2.png" type="Texture" id=10]
-[ext_resource path="res://assets/player/hurt/player-hurt-1.png" type="Texture" id=11]
-[ext_resource path="res://assets/player/idle/player-idle-1.png" type="Texture" id=12]
+[ext_resource path="res://assets/player/Owlet_Monster/Owlet_Monster_Death_8.png" type="Texture" id=1]
+[ext_resource path="res://assets/player/Owlet_Monster/Owlet_Monster_Run_6.png" type="Texture" id=2]
+[ext_resource path="res://assets/player/Owlet_Monster/Owlet_Monster_Idle_4.png" type="Texture" id=12]
 [ext_resource path="res://player/Player.gd" type="Script" id=13]
 [ext_resource path="res://assets/audio/Cherry.wav" type="AudioStream" id=14]
 [ext_resource path="res://assets/audio/Hit.wav" type="AudioStream" id=15]
@@ -21,21 +12,93 @@
 radius = 7.68462
 height = 5.25075
 
-[sub_resource type="SpriteFrames" id=2]
+[sub_resource type="AtlasTexture" id=2]
+atlas = ExtResource( 12 )
+region = Rect2( 0, 0, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=3]
+atlas = ExtResource( 12 )
+region = Rect2( 32, 0, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=4]
+atlas = ExtResource( 12 )
+region = Rect2( 64, 0, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=5]
+atlas = ExtResource( 12 )
+region = Rect2( 96, 0, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=6]
+atlas = ExtResource( 1 )
+region = Rect2( 0, 0, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=7]
+atlas = ExtResource( 1 )
+region = Rect2( 32, 0, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=8]
+atlas = ExtResource( 1 )
+region = Rect2( 64, 0, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=9]
+atlas = ExtResource( 1 )
+region = Rect2( 96, 0, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=10]
+atlas = ExtResource( 1 )
+region = Rect2( 128, 0, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=11]
+atlas = ExtResource( 1 )
+region = Rect2( 160, 0, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=12]
+atlas = ExtResource( 1 )
+region = Rect2( 192, 0, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=13]
+atlas = ExtResource( 1 )
+region = Rect2( 224, 0, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=14]
+atlas = ExtResource( 2 )
+region = Rect2( 0, 0, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=15]
+atlas = ExtResource( 2 )
+region = Rect2( 32, 0, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=16]
+atlas = ExtResource( 2 )
+region = Rect2( 64, 0, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=17]
+atlas = ExtResource( 2 )
+region = Rect2( 96, 0, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=18]
+atlas = ExtResource( 2 )
+region = Rect2( 128, 0, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=19]
+atlas = ExtResource( 2 )
+region = Rect2( 160, 0, 32, 32 )
+
+[sub_resource type="SpriteFrames" id=20]
 animations = [ {
-"frames": [ ExtResource( 12 ), ExtResource( 10 ), ExtResource( 6 ), ExtResource( 7 ) ],
+"frames": [ SubResource( 2 ), SubResource( 3 ), SubResource( 4 ), SubResource( 5 ) ],
 "loop": true,
 "name": "idle",
 "speed": 10.0
 }, {
-"frames": [ ExtResource( 2 ), ExtResource( 8 ), ExtResource( 3 ), ExtResource( 9 ), ExtResource( 5 ), ExtResource( 1 ) ],
-"loop": true,
-"name": "run",
-"speed": 10.0
-}, {
-"frames": [ ExtResource( 11 ), ExtResource( 4 ) ],
+"frames": [ SubResource( 6 ), SubResource( 7 ), SubResource( 8 ), SubResource( 9 ), SubResource( 10 ), SubResource( 11 ), SubResource( 12 ), SubResource( 13 ) ],
 "loop": true,
 "name": "hurt",
+"speed": 10.0
+}, {
+"frames": [ SubResource( 14 ), SubResource( 15 ), SubResource( 16 ), SubResource( 17 ), SubResource( 18 ), SubResource( 19 ) ],
+"loop": true,
+"name": "run",
 "speed": 10.0
 } ]
 
@@ -52,9 +115,8 @@ shape = SubResource( 1 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 position = Vector2( -2, 0 )
-frames = SubResource( 2 )
-animation = "idle"
-frame = 2
+frames = SubResource( 20 )
+animation = "run"
 playing = true
 
 [node name="FoodAudio" type="AudioStreamPlayer" parent="."]

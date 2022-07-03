@@ -70,15 +70,10 @@ func check_Stage():
 		stage+=1
 		initialTimeLeft += BONUS_TIME
 		$StageUp.play()
-#		audio = AudioStreamPlayer.new()
-#		audio.stream = load("res://assets/audio/Level.wav")
-#		add_child(audio)
-#		audio.play()
 		$HUD_Node/HUD.update_stage("Stage "+str(stage))
 		scoreByStage = BASE_FOOD+stage
 		scoreMaxByStage += scoreByStage
 		#gemsLeft = scoreByStage
-		
 		#auxStr = str($GemBag.get_child_count())+"\n"+str(scoreMaxByStage)
 		#$HUD_Node/HUD.update_score(auxStr)
 		spawn_food()
